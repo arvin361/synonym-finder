@@ -1,0 +1,10 @@
+// Global Styles
+@use "./variables" as *;
+@use "./mixins" as *;
+@use "./typography" as *;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
