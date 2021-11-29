@@ -47,7 +47,7 @@ function App() {
         </label>
 
         <button className="page__button" onClick={getSynonym} type="submit">
-          GO
+          SEARCH
         </button>
       </div>
 
