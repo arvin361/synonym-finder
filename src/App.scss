@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: $Eggshell;
+  // background-color: $Eggshell;
 
   font-family: "Poppins", sans-serif;
 
@@ -139,7 +139,7 @@
   width: 100%;
   border: 0;
   font-family: inherit;
-  padding: 16px 12px 0 12px;
+  padding: 0.5rem 0.5rem 0;
   height: 56px;
   font-size: 16px;
   font-weight: 400;

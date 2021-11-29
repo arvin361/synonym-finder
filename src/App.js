@@ -35,7 +35,7 @@ function App() {
     <div className="page">
       <h1 className="page__header">Synonyms</h1>
       <div className="page__search">
-        <label for="inp" className="inp">
+        <label htmlFor="inp" className="inp">
           <input
             type="text"
             placeholder="&nbsp;"
