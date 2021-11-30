@@ -1,6 +1,6 @@
-@use "../src/partials/fonts";
-@use "../src/partials/mixins" as *;
-@use "../src/partials/variables" as *;
+@use "../../partials/fonts";
+@use "../../partials/mixins" as *;
+@use "../../partials/variables" as *;
 
 * {
   margin: 0;
@@ -71,37 +71,14 @@
   }
 
   &__displayResults {
-    padding: 0px 20px 20px;
-  }
-
-  &__synonyms {
-    display: flex;
-    flex-wrap: wrap;
-    // justify-content: space-evenly;
-    margin: 8px;
-    color: $Independence;
-  }
-
-  &__synonym {
-    list-style: none;
-    padding: 4px 8px;
-    border: 1px solid $Independence;
-    border-radius: 10px;
-    align-items: center;
-    justify-content: center;
-    width: fit-content;
-    text-align: center;
-    margin: 3px;
-    background-color: rgb(245, 240, 240);
-  }
-
-  &__otherResults {
-    padding: 8px;
+    width: 300px;
+    padding: 20px;
   }
 
   &__word {
     font-size: 2rem;
     text-decoration: underline;
+    padding-bottom: 20px;
     text-align: center;
     color: $Independence;
   }
@@ -109,6 +86,10 @@
   &__subtitle {
     color: $Green-Sheen;
     padding: 8px 0;
+  }
+
+  &__synonym {
+    list-style: none;
   }
 }
 

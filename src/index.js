@@ -2,10 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
 import App from "./App";
+// import ThesaurusApi from "../src/pages/ThesaurusApi/ThesaurusApi";
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
+    {/* <ThesaurusApi /> */}
   </React.StrictMode>,
   document.getElementById("root")
 );

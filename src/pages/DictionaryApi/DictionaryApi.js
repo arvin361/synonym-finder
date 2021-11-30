@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import Axios from "axios";
 import "./App.scss";
 
-function App() {
+function Dictionaryapi() {
   // Use react hook 'useState' to set up initial state
   const [data, setData] = useState("");
   const [searchWord, setSearchWord] = useState("");
@@ -29,6 +29,8 @@ function App() {
     }
   };
 
+  // const Synonym = ({ searchWord }) => <li>{searchWord}</li>;
+
   return (
     <div className="page">
       <h1 className="page__header">Synonyms</h1>
@@ -51,35 +53,34 @@ function App() {
 
       {data && (
         <div className="page__displayResults">
-          <ul className="page__synonyms">
+          <h2 className="page__word">{data.word} </h2>
+          <h4 className="page__subtitle">Synonyms:</h4>
+          <ul>
             {data.meanings[1].definitions[0].synonyms.map((synonym, i) => (
               <li className="page__synonym" key={i}>
                 {synonym}
               </li>
             ))}
-            {data.meanings[0].definitions[0].synonyms.map((synonym, i) => (
-              <li className="page__synonym" key={i}>
-                {synonym}
-              </li>
-            ))}
           </ul>
-          <section className="page__otherResults">
-            <h2 className="page__word">{data.word} </h2>
-
-            <h4 className="page__subtitle">Definition:</h4>
-            <p>{data.meanings[0].definitions[0].definition}</p>
-            <h4 className="page__subtitle">Parts of speech:</h4>
-            <p>{data.meanings[0].partOfSpeech}</p>
-            <h4 className="page__subtitle">Example:</h4>
-            <p>{data.meanings[0].definitions[0].example}</p>
-          </section>
-
-          {console.log(data.meanings[0].definitions[0].synonyms)}
+          <h4 className="page__subtitle">Definition:</h4>
+          <p>{data.meanings[0].definitions[0].definition}</p>
+          <h4 className="page__subtitle">Parts of speech:</h4>
+          <p>{data.meanings[0].partOfSpeech}</p>
+          <h4 className="page__subtitle">Example:</h4>
+          <p>{data.meanings[0].definitions[0].example}</p>
           {console.log(data.meanings[1].definitions[0].synonyms)}
+          {/* <p>{data.meanings[1].definitions[0].synonyms}</p> */}
+          {/* {data.meanings[1].definitions[0].synonyms}.map{} */}
+
+          {/* <ul>
+            {data.meanings[1].definitions[0].synonyms.map((searchWord, i) => (
+              <Synonym query={searchWord} key={i} />
+            ))}
+          </ul> */}
         </div>
       )}
     </div>
   );
 }
 
-export default App;
+export default Dictionaryapi;
