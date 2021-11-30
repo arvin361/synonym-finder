@@ -31,7 +31,10 @@ function App() {
 
   return (
     <div className="page">
+      {/* HEADER */}
       <h1 className="page__header">Synonyms</h1>
+
+      {/* SEARCH SECTION */}
       <div className="page__search">
         <label htmlFor="inp" className="inp">
           <input
@@ -49,29 +52,71 @@ function App() {
         </button>
       </div>
 
+      {/* RESULTS SECTION */}
       {data && (
         <div className="page__displayResults">
+          {/* MAP SYNONYMS ARRAY */}
           <ul className="page__synonyms">
-            {data.meanings[1].definitions[0].synonyms.map((synonym, i) => (
-              <li className="page__synonym" key={i}>
-                {synonym}
-              </li>
-            ))}
             {data.meanings[0].definitions[0].synonyms.map((synonym, i) => (
               <li className="page__synonym" key={i}>
                 {synonym}
               </li>
             ))}
+            {data.meanings[1].definitions[0].synonyms.map((synonym, i) => (
+              <li className="page__synonym" key={i}>
+                {synonym}
+              </li>
+            ))}
           </ul>
+
+          {/* OTHER RESULTS */}
           <section className="page__otherResults">
+            {/* SEARCHED WORD */}
             <h2 className="page__word">{data.word} </h2>
 
-            <h4 className="page__subtitle">Definition:</h4>
-            <p>{data.meanings[0].definitions[0].definition}</p>
-            <h4 className="page__subtitle">Parts of speech:</h4>
-            <p>{data.meanings[0].partOfSpeech}</p>
-            <h4 className="page__subtitle">Example:</h4>
-            <p>{data.meanings[0].definitions[0].example}</p>
+            {/* DEFINITIONS */}
+            <h1 className="page__header2">Definitions</h1>
+
+            <article className="page__typeResults">
+              <p className="page__typeOf">{data.meanings[0].partOfSpeech}</p>
+
+              <section className="page__typeDef">
+                <p className="page__define-result">
+                  {data.meanings[0].definitions[0].definition}
+                </p>
+
+                <q className="page__example">
+                  {data.meanings[0].definitions[0].example}
+                </q>
+              </section>
+            </article>
+
+            <article className="page__typeResults">
+              <p className="page__typeOf">{data.meanings[1].partOfSpeech}</p>
+
+              <section className="page__typeDef">
+                <p className="page__define-result">
+                  {data.meanings[1].definitions[0].definition}
+                </p>
+
+                <q className="page__example">
+                  {data.meanings[1].definitions[0].example}
+                </q>
+              </section>
+            </article>
+            <article className="page__typeResults">
+              <p className="page__typeOf">{data.meanings[2].partOfSpeech}</p>
+
+              <section className="page__typeDef">
+                <p className="page__define-result">
+                  {data.meanings[2].definitions[0].definition}
+                </p>
+
+                <q className="page__example">
+                  {data.meanings[2].definitions[0].example}
+                </q>
+              </section>
+            </article>
           </section>
 
           {console.log(data.meanings[0].definitions[0].synonyms)}

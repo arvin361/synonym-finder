@@ -26,6 +26,14 @@
     padding: 0.5rem;
   }
 
+  &__header2 {
+    text-align: center;
+    font-size: 2rem;
+    font-family: "Pacifico", cursive;
+    color: #3a86ff;
+    padding: 0.5rem;
+  }
+
   &__search {
     text-align: center;
     padding: 1rem 0;
@@ -83,16 +91,17 @@
   }
 
   &__synonym {
+    font-size: 1rem;
     list-style: none;
     padding: 4px 8px;
     border: 1px solid $Independence;
-    border-radius: 10px;
+    border-radius: 20px;
     align-items: center;
     justify-content: center;
     width: fit-content;
     text-align: center;
     margin: 3px;
-    background-color: rgb(245, 240, 240);
+    background-color: whitesmoke;
   }
 
   &__otherResults {
@@ -106,9 +115,34 @@
     color: $Independence;
   }
 
+  // &__typeResults {
+  //   padding: 10px 8px;
+  // }
+
+  &__typeOf {
+    font-size: 1rem;
+    font-style: italic;
+    color: $Green-Sheen;
+    font-weight: bold;
+  }
+
   &__subtitle {
     color: $Green-Sheen;
-    padding: 8px 0;
+    padding: 4px 0;
+  }
+
+  &__typeDef {
+    padding: 0 10px 8px;
+  }
+
+  &__define-result {
+    font-size: 0.9375rem;
+    padding: 4px 0;
+  }
+
+  &__example {
+    font-size: 0.9375rem;
+    color: #8d99ae;
   }
 }
 
