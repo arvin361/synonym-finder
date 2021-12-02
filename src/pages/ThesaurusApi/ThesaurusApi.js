@@ -1,10 +1,12 @@
 import { React, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import "./ThesaurusApi.scss";
 
 function ThesaurusApi(props) {
-  console.log(props);
+  const { id } = useParams();
+  console.log(id);
   // Use react hook 'useState' to set up initial state
   const [data, setData] = useState("");
   const [wordList, setWordList] = useState("");
@@ -28,22 +30,33 @@ function ThesaurusApi(props) {
 
         // console.log(response.data[0].def[0].sseq[0].dt[1].t[0]);
 
+        const synonymList = response.data[0].meta.syns;
+
+        console.log(synonymList);
+
         const syn1 = response.data[0].meta.syns[0];
         const syn2 = response.data[0].meta.syns[1];
 
-        let synList = [...syn1, ...syn2];
+        const synList = syn1;
+
+        if (synonymList.length === 1) {
+          setWordList(synList);
+        } else {
+          let synList = [...syn1, ...syn2];
+          setWordList(synList);
+        }
 
         // let wordList =
 
         // let verbList =
 
-        console.log(response.data[0].shortdef);
+        // console.log(synList);
+        // console.log(response.data[0].shortdef);
 
         // console.log(wordList[0]);
 
-        setWordList(synList);
+        // setWordList(synList);
         setNotFound("blue");
-        console.log(synList);
 
         setData(response.data);
       } else {
@@ -79,6 +92,7 @@ function ThesaurusApi(props) {
             placeholder="&nbsp;"
             onChange={handleChange}
             onKeyPress={handleKeypress}
+            // onClick={window.location.reload(true)}
           />
           <span className="label">Whats Another Word For...</span>
           <span className="focus-bg"></span>
@@ -90,117 +104,97 @@ function ThesaurusApi(props) {
       </div>
 
       {/* RESULTS SECTION */}
-      {wordList && (
-        <div>
-          <div className={notFound}>
-            <p className="thes__notFound">Did you mean:</p>
-          </div>
 
-          <ul className="thes__synonyms">
-            {wordList.map((synonym, i) => (
-              <Link to={synonym}>
-                <li className="thes__synonym" key={i}>
-                  {synonym}
-                </li>
-              </Link>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {data && (
-        <div className="thes__displayResults">
-          {/* MAP SYNONYMS ARRAY */}
-          {/* <ul className="thes__synonyms">
-            {wordList.map((synonym, i) => (
-              <Link to={synonym}>
-                <li className="thes__synonym" key={i}>
-                  {synonym}
-                </li>
-              </Link>
-            ))}
-          </ul> */}
-
-          {/* OTHER RESULTS */}
-          <section className="thes__otherResults">
-            {/* SEARCHED WORD */}
-            <h2 className="thes__word">{data[0].meta.id} </h2>
-
-            {/* DEFINITIONS */}
-            <h1 className="thes__header2">Definitions</h1>
-
-            <article className="thes__typeResults">
-              <p className="thes__typeOf">{data[0].fl}</p>
-
-              <section className="thes__typeDef">
-                <ol className="thes__shortDef">
-                  {data[0].shortdef.map((def, i) => (
-                    <li className="thes__define-result" key={i}>
-                      {def}
+      {data
+        ? data && (
+            <div className="thes__displayResults">
+              {/* MAP SYNONYMS ARRAY */}
+              <ul className="thes__synonyms">
+                {wordList.map((synonym, i) => (
+                  <Link to={synonym}>
+                    <li className="thes__synonym" key={i}>
+                      {synonym}
                     </li>
-                  ))}
-                </ol>
+                  </Link>
+                ))}
+              </ul>
 
-                {/* <q className="thes__example">{data[0].def.sseq[0].dt[1]}</q> */}
-              </section>
-            </article>
+              {/* OTHER RESULTS */}
+              <section className="thes__otherResults">
+                {/* SEARCHED WORD */}
+                <h2 className="thes__word">{data[0].meta.id} </h2>
 
-            <article className="thes__typeResults">
-              <p className="thes__typeOf">{data[1].fl}</p>
+                {/* DEFINITIONS */}
+                <h1 className="thes__header2">Definitions</h1>
 
-              <section className="thes__typeDef">
-                <ol className="thes__shortDef">
-                  {data[1].shortdef.map((def, i) => (
-                    <li className="thes__define-result" key={i}>
-                      {def}
-                    </li>
-                  ))}
-                </ol>
+                <article className="thes__typeResults">
+                  <p className="thes__typeOf">{data[0].fl}</p>
 
-                {/* <q className="thes__example">
+                  <section className="thes__typeDef">
+                    <ol className="thes__shortDef">
+                      {data[0].shortdef.map((def, i) => (
+                        <li className="thes__define-result" key={i}>
+                          {def}
+                        </li>
+                      ))}
+                    </ol>
+
+                    {/* <q className="thes__example">{data[0].def.sseq[0].dt[1]}</q> */}
+                  </section>
+                </article>
+
+                <article className="thes__typeResults">
+                  <p className="thes__typeOf">{data[1].fl}</p>
+
+                  <section className="thes__typeDef">
+                    <ol className="thes__shortDef">
+                      {data[1].shortdef.map((def, i) => (
+                        <li className="thes__define-result" key={i}>
+                          {def}
+                        </li>
+                      ))}
+                    </ol>
+
+                    {/* <q className="thes__example">
                       {data.meanings[1].definitions[0].example}
                     </q> */}
-              </section>
-            </article>
-            <article className="thes__typeResults">
-              <p className="thes__typeOf">{data[2].fl}</p>
+                  </section>
+                </article>
+                <article className="thes__typeResults">
+                  <p className="thes__typeOf">{data[2].fl}</p>
 
-              <section className="thes__typeDef">
-                <ol className="thes__shortDef">
-                  {data[2].shortdef.map((def, i) => (
-                    <li className="thes__define-result" key={i}>
-                      {def}
+                  <section className="thes__typeDef">
+                    <ol className="thes__shortDef">
+                      {data[2].shortdef.map((def, i) => (
+                        <li className="thes__define-result" key={i}>
+                          {def}
+                        </li>
+                      ))}
+                    </ol>
+                  </section>
+                </article>
+              </section>
+            </div>
+          )
+        : wordList && (
+            <div>
+              <div className={notFound}>
+                <p className="thes__notFound">Did you mean:</p>
+              </div>
+
+              <ul className="thes__notWordList">
+                {wordList.map((synonym, i) => (
+                  <Link to={synonym}>
+                    <li className="thes__notWord" key={i}>
+                      {synonym}
                     </li>
-                  ))}
-                </ol>
-
-                {/* <q className="thes__example">
-                      {data.meanings[2].definitions[0].example}
-                    </q> */}
-              </section>
-            </article>
-          </section>
-        </div>
-      )}
+                  </Link>
+                ))}
+              </ul>
+            </div>
+          )}
     </div>
   );
-
-  /* return (
-    <div className="thes__resultFalse">
-            <p>Did you mean:</p>
-            <ul className="thes__noResult">
-              {notFound.map((word, i) => (
-                <Link to="">
-                  <li className="thes__synonym" key={i}>
-                    {word}
-                  </li>
-                </Link>
-              ))}
-            </ul>
-          </div>
-        
-      </div>
-  ) */
 }
 
 export default ThesaurusApi;

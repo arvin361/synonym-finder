@@ -15,7 +15,6 @@
 
 .red {
   color: red;
-  border: none;
 }
 
 .thes {
@@ -32,14 +31,6 @@
     font-size: 2rem;
     font-family: "Pacifico", cursive;
     color: $Terra-Cotta;
-    padding: 0.5rem;
-  }
-
-  &__header2 {
-    text-align: center;
-    font-size: 2rem;
-    font-family: "Pacifico", cursive;
-    color: #3a86ff;
     padding: 0.5rem;
   }
 
@@ -86,21 +77,25 @@
       border-radius: 10px;
     }
   }
+}
 
-  &__displayResults {
-    padding: 0px 20px 20px;
-  }
+.displayResults {
+  padding: 0px 20px 20px;
 
   &__synonyms {
     display: flex;
     flex-wrap: wrap;
     // justify-content: space-evenly;
     margin: 8px;
-    color: $Independence;
+  }
+
+  &__link {
+    text-decoration: none;
   }
 
   &__synonym {
     font-size: 1rem;
+    color: $Independence;
     list-style: none;
     padding: 4px 8px;
     border: 1px solid $Independence;
@@ -111,9 +106,10 @@
     text-align: center;
     margin: 3px;
     background-color: whitesmoke;
+    text-decoration: none;
   }
 
-  &__otherResults {
+  &__definitions {
     padding: 8px;
   }
 
@@ -122,6 +118,14 @@
     text-decoration: underline;
     text-align: center;
     color: $Independence;
+  }
+
+  &__header2 {
+    text-align: center;
+    font-size: 2rem;
+    font-family: "Pacifico", cursive;
+    color: #3a86ff;
+    padding: 0.5rem;
   }
 
   // &__typeResults {
@@ -150,11 +154,13 @@
     padding: 4px 8px;
   }
 
-  &__example {
-    font-size: 0.9375rem;
-    color: #8d99ae;
-  }
+  // &__example {
+  //   font-size: 0.9375rem;
+  //   color: #8d99ae;
+  // }
+}
 
+.otherResults {
   &__notFound {
     font-size: 1.5rem;
     text-align: center;
@@ -165,12 +171,12 @@
     display: flex;
     flex-wrap: wrap;
     // justify-content: space-evenly;
-    margin: 8px;
-    color: $Independence;
+    padding: 10px 20px;
   }
 
   &__notWord {
     font-size: 1.2rem;
+    color: $Independence;
     list-style: none;
     padding: 4px 8px;
     align-items: center;

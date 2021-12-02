@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./index.scss";
 // import App from "./App";
-import ThesaurusApi from "../src/pages/ThesaurusApi/ThesaurusApi";
+import ThesaurusApi from "../src/pages/ThesaurusApiNew/ThesaurusApi";
 
 ReactDOM.render(
   <React.StrictMode>
