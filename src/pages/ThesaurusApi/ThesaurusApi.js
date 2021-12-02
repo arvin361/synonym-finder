@@ -60,7 +60,7 @@ function ThesaurusApi(props) {
 
         setData(response.data);
       } else {
-        console.log(response.data);
+        // console.log(response.data);
         setWordList(response.data);
         setNotFound("red");
       }

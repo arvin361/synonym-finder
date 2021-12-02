@@ -17,8 +17,7 @@ function ThesaurusApi(props) {
   const apiURL = `
   https://www.dictionaryapi.com/api/v3/references/thesaurus/json/${searchWord}?key=${apiKey}`;
 
-  // Function to fetch information on button
-  // click, and set the data accordingly
+  // Function to fetch information on search and set data accordingly
   const getSynonym = (e) => {
     Axios.get(apiURL).then((response) => {
       if (response.data[0].meta) {
@@ -54,18 +53,20 @@ function ThesaurusApi(props) {
     });
   };
 
+  // Refresh page in order to avoid false words being true
   const refreshPage = () => {
     window.location.reload();
   };
 
+  // Search word on change
   const handleChange = (e) => {
     setSearchWord(e.target.value);
   };
 
+  // Function that triggers by pressing the enter key
   const handleKeypress = (e) => {
-    //it triggers by pressing the enter key
     var key = e.keyCode || e.which;
-    if (key === 13) {
+    if (key === 13 && searchWord) {
       getSynonym();
     }
   };
@@ -82,6 +83,7 @@ function ThesaurusApi(props) {
         <label htmlFor="inp" className="inp">
           <input
             type="text"
+            value={searchWord}
             placeholder="&nbsp;"
             onChange={handleChange}
             onKeyPress={handleKeypress}
@@ -90,7 +92,12 @@ function ThesaurusApi(props) {
           <span className="focus-bg"></span>
         </label>
 
-        <button className="thes__button" onClick={getSynonym} type="submit">
+        <button
+          disabled={!searchWord}
+          className="thes__button"
+          onClick={getSynonym}
+          type="submit"
+        >
           SEARCH
         </button>
         {/* <button className="thes__button" type="submit">
