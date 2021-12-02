@@ -19,6 +19,7 @@ function ThesaurusApi(props) {
 
   // Function to fetch information on search and set data accordingly
   const getSynonym = (e) => {
+    resetInputField();
     Axios.get(apiURL).then((response) => {
       if (response.data[0].meta) {
         console.log(response.data);
@@ -68,7 +69,13 @@ function ThesaurusApi(props) {
     var key = e.keyCode || e.which;
     if (key === 13 && searchWord) {
       getSynonym();
+      resetInputField();
     }
+  };
+
+  // Reset Input Field handler
+  const resetInputField = () => {
+    setSearchWord("");
   };
 
   return (
