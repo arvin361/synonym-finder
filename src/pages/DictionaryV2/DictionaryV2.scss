@@ -1,0 +1,226 @@
+@use "../../partials/fonts";
+@use "../../partials/mixins" as *;
+@use "../../partials/variables" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.page {
+  min-height: 100vh;
+  // min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $Eggshell;
+  font-family: "Poppins", sans-serif;
+
+  &__header {
+    text-align: center;
+    font-size: 2rem;
+    font-family: "Pacifico", cursive;
+    color: $Terra-Cotta;
+    padding: 0.5rem;
+  }
+
+  &__header2 {
+    text-align: center;
+    font-size: 2rem;
+    font-family: "Pacifico", cursive;
+    color: #3a86ff;
+    padding: 0.5rem;
+  }
+
+  &__search {
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  &__button {
+    position: relative;
+    background-color: #4caf50;
+    border: none;
+    font-size: 1rem;
+    padding: 4px;
+    color: #ffffff;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-top: 10px;
+    width: 50%;
+
+    &::after {
+      content: "";
+      background: #f1f1f1;
+      display: block;
+      position: absolute;
+      padding-top: 300%;
+      padding-left: 350%;
+      margin-left: -20px !important;
+      margin-top: -120%;
+      opacity: 0;
+      transition: all 0.8s;
+      border-radius: 10px;
+    }
+
+    &:active::after {
+      padding: 0;
+      margin: 0;
+      opacity: 1;
+      transition: 0s;
+      border-radius: 10px;
+    }
+  }
+
+  &__displayResults {
+    padding: 0px 20px 20px;
+  }
+
+  &__synonyms {
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: space-evenly;
+    margin: 8px;
+    color: $Independence;
+  }
+
+  &__synonym {
+    font-size: 1rem;
+    list-style: none;
+    padding: 4px 8px;
+    border: 1px solid $Independence;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    text-align: center;
+    margin: 3px;
+    background-color: whitesmoke;
+  }
+
+  &__otherResults {
+    padding: 8px;
+  }
+
+  &__word {
+    font-size: 2rem;
+    text-decoration: underline;
+    text-align: center;
+    color: $Independence;
+  }
+
+  // &__typeResults {
+  //   padding: 10px 8px;
+  // }
+
+  &__typeOf {
+    font-size: 1rem;
+    font-style: italic;
+    color: $Green-Sheen;
+    font-weight: bold;
+  }
+
+  &__subtitle {
+    color: $Green-Sheen;
+    padding: 4px 0;
+  }
+
+  &__typeDef {
+    padding: 0 10px 8px;
+  }
+
+  &__define-result {
+    font-size: 0.9375rem;
+    padding: 4px 0;
+  }
+
+  &__example {
+    font-size: 0.9375rem;
+    color: #8d99ae;
+  }
+}
+
+// Input Field Styling
+
+.inp {
+  position: relative;
+  margin: auto;
+  width: 100%;
+  max-width: 280px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.inp .label {
+  position: absolute;
+  top: -14px;
+  left: 10px;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 500;
+  transform-origin: 0 0;
+  transform: translate3d(0, 0, 0);
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+.inp .focus-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.05);
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.inp input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  border: 0;
+  font-family: inherit;
+  padding: 20px 0.5rem 0;
+  height: 60px;
+  font-size: 16px;
+  font-weight: 400;
+  background: rgba(0, 0, 0, 0.02);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  color: #000;
+  transition: all 0.15s ease;
+}
+.inp input:hover {
+  background: rgba(0, 0, 0, 0.04);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+.inp input:not(:-moz-placeholder-shown) + .label {
+  color: rgba(0, 0, 0, 0.5);
+  transform: translate3d(0, -12px, 0) scale(0.75);
+}
+.inp input:not(:-ms-input-placeholder) + .label {
+  color: rgba(0, 0, 0, 0.5);
+  transform: translate3d(0, -12px, 0) scale(0.75);
+}
+.inp input:not(:placeholder-shown) + .label {
+  color: rgba(0, 0, 0, 0.5);
+  transform: translate3d(0, -12px, 0) scale(0.75);
+}
+.inp input:focus {
+  background: rgba(0, 0, 0, 0.05);
+  outline: none;
+  box-shadow: inset 0 -2px 0 #0077ff;
+}
+.inp input:focus + .label {
+  color: #0077ff;
+  transform: translate3d(0, -12px, 0) scale(0.75);
+}
+.inp input:focus + .label + .focus-bg {
+  transform: scaleX(1);
+  transition: all 0.1s ease;
+}
