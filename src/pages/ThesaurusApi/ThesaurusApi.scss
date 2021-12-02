@@ -9,6 +9,15 @@
   font-family: "Poppins", sans-serif;
 }
 
+.blue {
+  color: blue;
+}
+
+.red {
+  color: red;
+  border: none;
+}
+
 .thes {
   min-height: 100vh;
   // min-width: 250px;
@@ -23,6 +32,14 @@
     font-size: 2rem;
     font-family: "Pacifico", cursive;
     color: $Terra-Cotta;
+    padding: 0.5rem;
+  }
+
+  &__header2 {
+    text-align: center;
+    font-size: 2rem;
+    font-family: "Pacifico", cursive;
+    color: #3a86ff;
     padding: 0.5rem;
   }
 
@@ -70,26 +87,77 @@
     }
   }
 
+  &__notFound {
+    font-size: 1rem;
+    text-align: center;
+  }
+
   &__displayResults {
-    width: 300px;
-    padding: 20px;
+    padding: 0px 20px 20px;
+  }
+
+  &__synonyms {
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: space-evenly;
+    margin: 8px;
+    color: $Independence;
+  }
+
+  &__synonym {
+    font-size: 1rem;
+    list-style: none;
+    padding: 4px 8px;
+    border: 1px solid $Independence;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    text-align: center;
+    margin: 3px;
+    background-color: whitesmoke;
+  }
+
+  &__otherResults {
+    padding: 8px;
   }
 
   &__word {
     font-size: 2rem;
     text-decoration: underline;
-    padding-bottom: 20px;
     text-align: center;
     color: $Independence;
   }
 
-  &__subtitle {
+  // &__typeResults {
+  //   padding: 10px 8px;
+  // }
+
+  &__typeOf {
+    font-size: 1rem;
+    font-style: italic;
     color: $Green-Sheen;
-    padding: 8px 0;
+    font-weight: bold;
   }
 
-  &__synonym {
-    list-style: none;
+  &__subtitle {
+    color: $Green-Sheen;
+    padding: 4px 0;
+  }
+
+  &__typeDef {
+    padding: 0 0 8px;
+    margin: 0 2rem;
+  }
+
+  &__define-result {
+    font-size: 0.9375rem;
+    padding: 4px 8px;
+  }
+
+  &__example {
+    font-size: 0.9375rem;
+    color: #8d99ae;
   }
 }
 

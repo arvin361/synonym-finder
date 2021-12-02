@@ -1,13 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./index.scss";
-import App from "./App";
-// import ThesaurusApi from "../src/pages/ThesaurusApi/ThesaurusApi";
+// import App from "./App";
+import ThesaurusApi from "../src/pages/ThesaurusApi/ThesaurusApi";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
-    {/* <ThesaurusApi /> */}
+    <BrowserRouter>
+      {/* <App /> */}
+      <ThesaurusApi />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
