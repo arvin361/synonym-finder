@@ -82,6 +82,13 @@
 .displayResults {
   padding: 0px 20px 20px;
 
+  &__word {
+    font-size: 2rem;
+    text-decoration: underline;
+    text-align: center;
+    color: $Independence;
+  }
+
   &__synonyms {
     display: flex;
     flex-wrap: wrap;
@@ -111,13 +118,6 @@
 
   &__definitions {
     padding: 8px;
-  }
-
-  &__word {
-    font-size: 2rem;
-    text-decoration: underline;
-    text-align: center;
-    color: $Independence;
   }
 
   &__header2 {

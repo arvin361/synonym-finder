@@ -1,57 +1,125 @@
-import { React, useState } from "react";
-// import { useParams } from "react-router-dom";
+import { React, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import "./ThesaurusApi.scss";
 
 function ThesaurusApi(props) {
-  // const { id } = useParams();
+  let { id } = useParams();
   // console.log(id);
+
   // Use react hook 'useState' to set up initial state
   const [data, setData] = useState("");
   const [wordList, setWordList] = useState("");
   const [searchWord, setSearchWord] = useState("");
   const [notFound, setNotFound] = useState("");
 
+  // Use hooks to initalize parts of speech
+  const [adjWord, setAdjWord] = useState("");
+  const [nounWord, setNounWord] = useState("");
+  const [adverbWord, setAdverbWord] = useState("");
+  const [verbWord, setVerbWord] = useState("");
+
+  // const getWord = () => {
+  //   Axios.get(
+  //     `https://www.dictionaryapi.com/api/v3/references/thesaurus/json/${id}?key=${apiKey}`
+  //   )
+  //     .then((response) => {
+  //       setSearchWord(response.data[0].meta);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
+  useEffect(() => {
+    setSearchWord();
+  }, [id]);
+
+  // API KEY AND URL
   const apiKey = "4a7d190a-e6c6-4c00-b595-a957035618a5";
   const apiURL = `
   https://www.dictionaryapi.com/api/v3/references/thesaurus/json/${searchWord}?key=${apiKey}`;
 
   // Function to fetch information on search and set data accordingly
-  const getSynonym = (e) => {
+  const getSynonym = () => {
+    setData("");
     resetInputField();
-    Axios.get(apiURL).then((response) => {
-      if (response.data[0].meta) {
-        console.log(response.data);
+    Axios.get(apiURL)
+      .then((response) => {
+        if (response.data[0].meta) {
+          console.log(response.data);
 
-        const synonymList = response.data[0].meta.syns;
+          const synonymList = response.data[0].meta.syns;
 
-        console.log(synonymList);
+          console.log(synonymList);
 
-        const syns1 = response.data[0].meta.syns[0];
-        const syns2 = response.data[0].meta.syns[1];
-        const syns3 = response.data[0].meta.syns[2];
+          const syns1 = response.data[0].meta.syns[0];
+          const syns2 = response.data[0].meta.syns[1];
+          const syns3 = response.data[0].meta.syns[2];
 
-        const synList = syns1;
+          const synList = syns1;
 
-        if (synonymList.length === 1) {
-          setWordList(synList);
+          if (synonymList.length === 1) {
+            setWordList(synList);
+          } else {
+            let synList = [...syns1, ...syns2, ...syns3];
+            setWordList(synList);
+          }
+
+          console.log(synList);
+
+          const adjective = response.data.filter(function (speech) {
+            return speech.fl === "adjective";
+          });
+          const noun = response.data.filter(function (speech) {
+            return speech.fl === "noun";
+          });
+          const adverb = response.data.filter(function (speech) {
+            return speech.fl === "adverb";
+          });
+          const verb = response.data.filter(function (speech) {
+            return speech.fl === "verb";
+          });
+
+          // console.log(adjective);
+          // console.log(noun);
+          // console.log(verb);
+
+          if (adjective.length > 0) {
+            const adjWord = adjective;
+            setAdjWord(adjWord);
+          }
+          // console.log(adjWord[0].fl);
+          // console.log(adjWord[0].shortdef[0]);
+
+          if (noun.length > 0) {
+            const nounWord = noun;
+            setNounWord(nounWord);
+          }
+
+          if (adverb.length > 0) {
+            const adverbWord = adverb;
+            setAdverbWord(adverbWord);
+          }
+
+          if (verb.length > 0) {
+            const verbWord = verb;
+            setVerbWord(verbWord);
+          }
+
+          setNotFound("blue");
+
+          setData(response.data);
         } else {
-          let synList = [...syns1, ...syns2, ...syns3];
-          setWordList(synList);
+          // console.log(response.data);
+          setWordList(response.data);
+          setNotFound("red");
         }
-
-        console.log(synList);
-
-        setNotFound("blue");
-
-        setData(response.data);
-      } else {
-        // console.log(response.data);
-        setWordList(response.data);
-        setNotFound("red");
-      }
-    });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   // Refresh page in order to avoid false words being true
@@ -117,12 +185,14 @@ function ThesaurusApi(props) {
       {data
         ? data && (
             <div className="displayResults">
+              {/* SEARCHED WORD */}
+              <h3 className="displayResults__word">{data[0].meta.id} </h3>
               {/* MAP SYNONYMS ARRAY */}
               <ul className="displayResults__synonyms">
                 {wordList.map((synonym, i) => (
                   <Link
                     className="displayResults__link"
-                    // onClick={getSynonym}
+                    // onClick={getSynonym(pathname)}
                     to={synonym}
                   >
                     <li className="displayResults__synonym" key={i}>
@@ -134,25 +204,73 @@ function ThesaurusApi(props) {
 
               {/* DEFINITIONS RESULTS */}
               <section className="displayResults__definitions">
-                {/* SEARCHED WORD */}
-                <h2 className="displayResults__word">{data[0].meta.id} </h2>
-
                 {/* DEFINITIONS */}
                 <h1 className="displayResults__header2">Definitions</h1>
 
-                <article className="displayResults__typeResults">
-                  <p className="displayResults__typeOf">{data[0].fl}</p>
+                {/* ADJECTIVE */}
+                {adjWord && (
+                  <article className="displayResults__typeResults">
+                    <p className="displayResults__typeOf">{adjWord[0].fl}</p>
 
-                  <section className="displayResults__typeDef">
-                    <ol className="displayResults__shortDef">
-                      {data[0].shortdef.map((def, i) => (
-                        <li className="displayResults__define-result" key={i}>
-                          {def}
-                        </li>
-                      ))}
-                    </ol>
-                  </section>
-                </article>
+                    <section className="displayResults__typeDef">
+                      <ol className="displayResults__shortDef">
+                        {adjWord[0].shortdef.map((def, i) => (
+                          <li className="displayResults__define-result" key={i}>
+                            {def}
+                          </li>
+                        ))}
+                      </ol>
+                    </section>
+                  </article>
+                )}
+
+                {nounWord && (
+                  <article className="displayResults__typeResults">
+                    <p className="displayResults__typeOf">{nounWord[0].fl}</p>
+
+                    <section className="displayResults__typeDef">
+                      <ol className="displayResults__shortDef">
+                        {nounWord[0].shortdef.map((def, i) => (
+                          <li className="displayResults__define-result" key={i}>
+                            {def}
+                          </li>
+                        ))}
+                      </ol>
+                    </section>
+                  </article>
+                )}
+
+                {adverbWord && (
+                  <article className="displayResults__typeResults">
+                    <p className="displayResults__typeOf">{adverbWord[0].fl}</p>
+
+                    <section className="displayResults__typeDef">
+                      <ol className="displayResults__shortDef">
+                        {adverbWord[0].shortdef.map((def, i) => (
+                          <li className="displayResults__define-result" key={i}>
+                            {def}
+                          </li>
+                        ))}
+                      </ol>
+                    </section>
+                  </article>
+                )}
+
+                {verbWord && (
+                  <article className="displayResults__typeResults">
+                    <p className="displayResults__typeOf">{verbWord[0].fl}</p>
+
+                    <section className="displayResults__typeDef">
+                      <ol className="displayResults__shortDef">
+                        {verbWord[0].shortdef.map((def, i) => (
+                          <li className="displayResults__define-result" key={i}>
+                            {def}
+                          </li>
+                        ))}
+                      </ol>
+                    </section>
+                  </article>
+                )}
               </section>
             </div>
           )
