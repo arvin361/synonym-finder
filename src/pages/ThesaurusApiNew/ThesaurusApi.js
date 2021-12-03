@@ -5,7 +5,7 @@ import axios from "axios";
 import "./ThesaurusApi.scss";
 
 function ThesaurusApi(props) {
-  let { id } = useParams();
+  const { id } = useParams();
   // console.log(id);
 
   // Use react hook 'useState' to set up initial state for searched word
@@ -30,10 +30,12 @@ function ThesaurusApi(props) {
   //       console.log(error);
   //     });
   // };
+  // console.log(id);
 
-  useEffect(() => {
-    setSearchWord();
-  }, [id]);
+  // useEffect(() => {
+  //   setSearchWord(id);
+  //   console.log(id);
+  // }, [id]);
 
   // API KEY and URL
   const apiKey = "4a7d190a-e6c6-4c00-b595-a957035618a5";
@@ -56,23 +58,32 @@ function ThesaurusApi(props) {
       .then((response) => {
         // If word exists then it contains a "meta" value
         if (response.data[0].meta) {
-          // Console log all data for searched word
-          console.log(response.data);
+          // Set response.data to variable rd
+          const rd = response.data;
 
-          const synonymList = response.data[0].meta.syns;
+          // Console log all data for searched word
+          console.log(rd);
+
+          const synonymList = rd[0].meta.syns;
 
           console.log(synonymList);
 
           const syns1 = response.data[0].meta.syns[0];
           const syns2 = response.data[0].meta.syns[1];
-          const syns3 = response.data[0].meta.syns[2];
+          // const syns3 = response.data[0].meta.syns[2];
+
+          response.data.forEach((element) => {
+            console.log(element.meta.syns);
+          });
+
+          console.log(response.data[0]);
 
           const synList = syns1;
 
           if (synonymList.length === 1) {
             setWordList(synList);
           } else {
-            let synList = [...syns1, ...syns2, ...syns3];
+            let synList = [...syns1, ...syns2];
             setWordList(synList);
           }
 
@@ -105,6 +116,7 @@ function ThesaurusApi(props) {
           // NOUN
           if (noun.length > 0) {
             const nounWord = noun;
+            console.log(nounWord);
             setNounWord(nounWord);
           }
           // ADVERB
@@ -117,6 +129,12 @@ function ThesaurusApi(props) {
             const verbWord = verb;
             setVerbWord(verbWord);
           }
+
+          // console.log(nounWord);
+
+          // const adjWordSyn = adjWord[0].meta.syns[0];
+
+          // console.log(adjWord[0].meta.syns[0]);
 
           // If word exists set data
           setData(response.data);
