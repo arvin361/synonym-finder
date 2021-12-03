@@ -1,27 +1,26 @@
 import { React, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import Axios from "axios";
+import axios from "axios";
 import "./ThesaurusApi.scss";
 
 function ThesaurusApi(props) {
   let { id } = useParams();
   // console.log(id);
 
-  // Use react hook 'useState' to set up initial state
+  // Use react hook 'useState' to set up initial state for searched word
   const [data, setData] = useState("");
   const [wordList, setWordList] = useState("");
   const [searchWord, setSearchWord] = useState("");
-  const [notFound, setNotFound] = useState("");
 
-  // Use hooks to initalize parts of speech
+  // Use react hook "useState" to set up initial state for parts of speech
   const [adjWord, setAdjWord] = useState("");
   const [nounWord, setNounWord] = useState("");
   const [adverbWord, setAdverbWord] = useState("");
   const [verbWord, setVerbWord] = useState("");
 
   // const getWord = () => {
-  //   Axios.get(
+  //   axios.get(
   //     `https://www.dictionaryapi.com/api/v3/references/thesaurus/json/${id}?key=${apiKey}`
   //   )
   //     .then((response) => {
@@ -36,18 +35,28 @@ function ThesaurusApi(props) {
     setSearchWord();
   }, [id]);
 
-  // API KEY AND URL
+  // API KEY and URL
   const apiKey = "4a7d190a-e6c6-4c00-b595-a957035618a5";
   const apiURL = `
   https://www.dictionaryapi.com/api/v3/references/thesaurus/json/${searchWord}?key=${apiKey}`;
 
   // Function to fetch information on search and set data accordingly
   const getSynonym = () => {
+    // Reset all states and input field
     setData("");
+    setAdjWord("");
+    setNounWord("");
+    setAdverbWord("");
+    setVerbWord("");
     resetInputField();
-    Axios.get(apiURL)
+
+    // AXIOS API CALL
+    axios
+      .get(apiURL)
       .then((response) => {
+        // If word exists then it contains a "meta" value
         if (response.data[0].meta) {
+          // Console log all data for searched word
           console.log(response.data);
 
           const synonymList = response.data[0].meta.syns;
@@ -69,52 +78,51 @@ function ThesaurusApi(props) {
 
           console.log(synList);
 
+          // Filtering through result to find if each has...
+          // ADJECTIVES
           const adjective = response.data.filter(function (speech) {
             return speech.fl === "adjective";
           });
+          // NOUNS
           const noun = response.data.filter(function (speech) {
             return speech.fl === "noun";
           });
+          // ADVERBS
           const adverb = response.data.filter(function (speech) {
             return speech.fl === "adverb";
           });
+          // VERBS
           const verb = response.data.filter(function (speech) {
             return speech.fl === "verb";
           });
 
-          // console.log(adjective);
-          // console.log(noun);
-          // console.log(verb);
-
+          // Check to see if specific word has the following parts of speech and set variable to set state for...
+          // ADJECTIVE
           if (adjective.length > 0) {
             const adjWord = adjective;
             setAdjWord(adjWord);
           }
-          // console.log(adjWord[0].fl);
-          // console.log(adjWord[0].shortdef[0]);
-
+          // NOUN
           if (noun.length > 0) {
             const nounWord = noun;
             setNounWord(nounWord);
           }
-
+          // ADVERB
           if (adverb.length > 0) {
             const adverbWord = adverb;
             setAdverbWord(adverbWord);
           }
-
+          // VERB
           if (verb.length > 0) {
             const verbWord = verb;
             setVerbWord(verbWord);
           }
 
-          setNotFound("blue");
-
+          // If word exists set data
           setData(response.data);
         } else {
-          // console.log(response.data);
+          // If word doesn't exist it contains no "meta" in result and set data to word list
           setWordList(response.data);
-          setNotFound("red");
         }
       })
       .catch((error) => {
@@ -122,17 +130,17 @@ function ThesaurusApi(props) {
       });
   };
 
-  // Refresh page in order to avoid false words being true
+  // Refresh page function
   const refreshPage = () => {
     window.location.reload();
   };
 
-  // Search word on change
+  // Search word on handle change
   const handleChange = (e) => {
     setSearchWord(e.target.value);
   };
 
-  // Function that triggers by pressing the enter key
+  // Search is triggered by the enter key and clears input field (only if there are values)
   const handleKeypress = (e) => {
     var key = e.keyCode || e.which;
     if (key === 13 && searchWord) {
@@ -141,7 +149,7 @@ function ThesaurusApi(props) {
     }
   };
 
-  // Reset Input Field handler
+  // Reset input field function
   const resetInputField = () => {
     setSearchWord("");
   };
@@ -157,6 +165,7 @@ function ThesaurusApi(props) {
       <div className="thes__search">
         <label htmlFor="inp" className="inp">
           <input
+            name="search"
             type="text"
             value={searchWord}
             placeholder="&nbsp;"
@@ -175,15 +184,12 @@ function ThesaurusApi(props) {
         >
           SEARCH
         </button>
-        {/* <button className="thes__button" type="submit">
-          Reset
-        </button> */}
       </div>
 
       {/* RESULTS SECTION */}
-
       {data
         ? data && (
+            // IF WORD EXISTS
             <div className="displayResults">
               {/* SEARCHED WORD */}
               <h3 className="displayResults__word">{data[0].meta.id} </h3>
@@ -207,11 +213,12 @@ function ThesaurusApi(props) {
                 {/* DEFINITIONS */}
                 <h1 className="displayResults__header2">Definitions</h1>
 
-                {/* ADJECTIVE */}
+                {/* ADJECTIVE (IF EXISTS) */}
                 {adjWord && (
                   <article className="displayResults__typeResults">
                     <p className="displayResults__typeOf">{adjWord[0].fl}</p>
 
+                    {/* MAP SHORT DEFINITIONS */}
                     <section className="displayResults__typeDef">
                       <ol className="displayResults__shortDef">
                         {adjWord[0].shortdef.map((def, i) => (
@@ -224,10 +231,12 @@ function ThesaurusApi(props) {
                   </article>
                 )}
 
+                {/* NOUN (IF EXISTS) */}
                 {nounWord && (
                   <article className="displayResults__typeResults">
                     <p className="displayResults__typeOf">{nounWord[0].fl}</p>
 
+                    {/* MAP SHORT DEFINITIONS */}
                     <section className="displayResults__typeDef">
                       <ol className="displayResults__shortDef">
                         {nounWord[0].shortdef.map((def, i) => (
@@ -240,10 +249,12 @@ function ThesaurusApi(props) {
                   </article>
                 )}
 
+                {/* ADVERB (IF EXISTS) */}
                 {adverbWord && (
                   <article className="displayResults__typeResults">
                     <p className="displayResults__typeOf">{adverbWord[0].fl}</p>
 
+                    {/* MAP SHORT DEFINITIONS */}
                     <section className="displayResults__typeDef">
                       <ol className="displayResults__shortDef">
                         {adverbWord[0].shortdef.map((def, i) => (
@@ -256,10 +267,12 @@ function ThesaurusApi(props) {
                   </article>
                 )}
 
+                {/* VERB (IF EXISTS) */}
                 {verbWord && (
                   <article className="displayResults__typeResults">
                     <p className="displayResults__typeOf">{verbWord[0].fl}</p>
 
+                    {/* MAP SHORT DEFINITIONS */}
                     <section className="displayResults__typeDef">
                       <ol className="displayResults__shortDef">
                         {verbWord[0].shortdef.map((def, i) => (
@@ -275,16 +288,16 @@ function ThesaurusApi(props) {
             </div>
           )
         : wordList && (
+            // WORD DOES NOT EXIST
             <div className="otherResults">
-              <div className={notFound}>
-                <p className="otherResults__notFound">Did you mean:</p>
-              </div>
+              <p className="otherResults__notFound">Did you mean:</p>
 
+              {/* MAP SUGGESTED WORDS */}
               <ul className="otherResults__notWordList">
-                {wordList.map((synonym, i) => (
-                  <Link to={synonym}>
+                {wordList.map((word, i) => (
+                  <Link to={word}>
                     <li className="otherResults__notWord" key={i}>
-                      {synonym}
+                      {word}
                     </li>
                   </Link>
                 ))}

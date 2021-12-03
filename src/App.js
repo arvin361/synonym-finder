@@ -1,19 +1,19 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import ThesaurusApi from "../src/pages/ThesaurusApiNew/ThesaurusApi";
 import "./App.scss";
 
 function App() {
   return (
     <Router>
-      <Switch>
-        <ThesaurusApi />
+      {/* <Switch> */}
+      <ThesaurusApi />
 
-        {/* <Route path="/:id">
+      {/* <Route path="/:id">
           <ThesaurusApi />
         </Route> */}
 
-        {/* <Route component={<ThesaurusApi />} /> */}
-      </Switch>
+      {/* <Route component={<ThesaurusApi />} /> */}
+      {/* </Switch> */}
     </Router>
   );
 }
