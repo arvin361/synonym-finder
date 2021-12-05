@@ -17,6 +17,7 @@ function ThesaurusApi(props) {
   const [nounWord, setNounWord] = useState("");
   const [adverbWord, setAdverbWord] = useState("");
   const [verbWord, setVerbWord] = useState("");
+  const [conjWord, setConjWord] = useState("");
 
   console.log(id);
 
@@ -53,6 +54,7 @@ function ThesaurusApi(props) {
     setNounWord("");
     setAdverbWord("");
     setVerbWord("");
+    setConjWord("");
 
     // AXIOS API CALL
     axios
@@ -108,6 +110,10 @@ function ThesaurusApi(props) {
           const verb = response.data.filter(function (speech) {
             return speech.fl === "verb";
           });
+          // CONJUCTIONS
+          const conjunction = response.data.filter(function (speech) {
+            return speech.fl === "conjunction";
+          });
 
           // Check to see if specific word has the following parts of speech and set variable to set state for...
           // ADJECTIVE
@@ -130,6 +136,12 @@ function ThesaurusApi(props) {
           if (verb.length > 0) {
             const verbWord = verb;
             setVerbWord(verbWord);
+          }
+
+          // CONJUNCTION
+          if (conjunction.length > 0) {
+            const conjWord = conjunction;
+            setConjWord(conjWord);
           }
 
           // console.log(nounWord);
@@ -294,6 +306,24 @@ function ThesaurusApi(props) {
                     <section className="displayResults__typeDef">
                       <ol className="displayResults__shortDef">
                         {verbWord[0].shortdef.map((def, i) => (
+                          <li className="displayResults__define-result" key={i}>
+                            {def}
+                          </li>
+                        ))}
+                      </ol>
+                    </section>
+                  </article>
+                )}
+
+                {/* CONJUNCTION (IF EXISTS) */}
+                {conjWord && (
+                  <article className="displayResults__typeResults">
+                    <p className="displayResults__typeOf">{conjWord[0].fl}</p>
+
+                    {/* MAP SHORT DEFINITIONS */}
+                    <section className="displayResults__typeDef">
+                      <ol className="displayResults__shortDef">
+                        {conjWord[0].shortdef.map((def, i) => (
                           <li className="displayResults__define-result" key={i}>
                             {def}
                           </li>
