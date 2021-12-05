@@ -5,19 +5,12 @@ import "./App.scss";
 function App() {
   return (
     <Router>
-      {/* <Switch> */}
-      {/* <ThesaurusApi /> */}
-
-      <Route>
+      <Switch>
         {/* <ThesaurusApi /> */}
 
-        {/* <ThesaurusApi path="/" exact /> */}
-        <ThesaurusApi path="/:id" />
-      </Route>
-
-      {/* <Route component={<ThesaurusApi />} /> */}
-      {/* <Route component={<ThesaurusApi />} path="/" exact /> */}
-      {/* </Switch> */}
+        <Route component={ThesaurusApi} path="/" exact />
+        <Route component={ThesaurusApi} path="/:id" />
+      </Switch>
     </Router>
   );
 }

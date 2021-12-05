@@ -6,7 +6,6 @@ import "./ThesaurusApi.scss";
 
 function ThesaurusApi(props) {
   const { id } = useParams();
-  // console.log(id);
 
   // Use react hook 'useState' to set up initial state for searched word
   const [data, setData] = useState("");
@@ -19,23 +18,23 @@ function ThesaurusApi(props) {
   const [adverbWord, setAdverbWord] = useState("");
   const [verbWord, setVerbWord] = useState("");
 
-  // const getWord = () => {
-  //   axios.get(
-  //     `https://www.dictionaryapi.com/api/v3/references/thesaurus/json/${id}?key=${apiKey}`
-  //   )
-  //     .then((response) => {
-  //       setSearchWord(response.data[0].meta);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-  // console.log(id);
+  console.log(id);
+
+  useEffect(() => {
+    setSearchWord(id);
+    // if (id) {
+    //   getSynonym();
+    // }
+
+    // setSearchWord(id);
+  }, [id]);
 
   // useEffect(() => {
-  //   setSearchWord(id);
-  //   console.log(id);
-  // }, [id]);
+  //   // setSearchWord(searchWord);
+  //   getSynonym();
+
+  //   // setSearchWord(id);
+  // }, [searchWord]);
 
   // API KEY and URL
   const apiKey = "4a7d190a-e6c6-4c00-b595-a957035618a5";
@@ -44,13 +43,16 @@ function ThesaurusApi(props) {
 
   // Function to fetch information on search and set data accordingly
   const getSynonym = () => {
+    if (!searchWord) {
+      return;
+    }
     // Reset all states and input field
     setData("");
+    setSearchWord("");
     setAdjWord("");
     setNounWord("");
     setAdverbWord("");
     setVerbWord("");
-    resetInputField();
 
     // AXIOS API CALL
     axios
@@ -148,6 +150,8 @@ function ThesaurusApi(props) {
       });
   };
 
+  /*--------------------- FUNCTIONS ----------------------------------- */
+
   // Refresh page function
   const refreshPage = () => {
     window.location.reload();
@@ -158,19 +162,15 @@ function ThesaurusApi(props) {
     setSearchWord(e.target.value);
   };
 
-  // Search is triggered by the enter key and clears input field (only if there are values)
+  // Search is triggered by the enter key (only if there are values)
   const handleKeypress = (e) => {
     var key = e.keyCode || e.which;
     if (key === 13 && searchWord) {
       getSynonym();
-      resetInputField();
     }
   };
 
-  // Reset input field function
-  const resetInputField = () => {
-    setSearchWord("");
-  };
+  /*--------------------- RETURN ----------------------------------- */
 
   return (
     <div className="thes">
@@ -179,15 +179,15 @@ function ThesaurusApi(props) {
         Synonyms
       </h1>
 
-      {/* SEARCH SECTION */}
-      <div className="thes__search">
+      {/*--------------------- SEARCH SECTION ----------------------------- */}
+      <form className="thes__search" onSubmit={handleChange}>
         <label htmlFor="inp" className="inp">
           <input
             name="search"
             type="text"
             value={searchWord}
             placeholder="&nbsp;"
-            onChange={handleChange}
+            // onChange={handleChange}
             onKeyPress={handleKeypress}
           />
           <span className="label">Whats Another Word For...</span>
@@ -202,9 +202,9 @@ function ThesaurusApi(props) {
         >
           SEARCH
         </button>
-      </div>
+      </form>
 
-      {/* RESULTS SECTION */}
+      {/*--------------------- RESULTS SECTION ----------------------------- */}
       {data
         ? data && (
             // IF WORD EXISTS
@@ -216,7 +216,7 @@ function ThesaurusApi(props) {
                 {wordList.map((synonym, i) => (
                   <Link
                     className="displayResults__link"
-                    // onClick={getSynonym(pathname)}
+                    // onClick={getSynonym()}
                     to={synonym}
                   >
                     <li className="displayResults__synonym" key={i}>
@@ -226,7 +226,7 @@ function ThesaurusApi(props) {
                 ))}
               </ul>
 
-              {/* DEFINITIONS RESULTS */}
+              {/*--------------------- DEFINITIONS SECTION ---------------------------- */}
               <section className="displayResults__definitions">
                 {/* DEFINITIONS */}
                 <h1 className="displayResults__header2">Definitions</h1>
