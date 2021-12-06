@@ -275,15 +275,6 @@ function ThesaurusApi(props) {
                       </Link>
                     ))}
                   </ul>
-                  {/* <ul className="displayResults__synonyms">
-                    {adjWord[0].meta.syns[1].map((synonym, i) => (
-                      <Link className="displayResults__link" to={synonym}>
-                        <li className="displayResults__synonym" key={i}>
-                          {synonym}
-                        </li>
-                      </Link>
-                    ))}
-                  </ul> */}
                 </article>
               )}
 
