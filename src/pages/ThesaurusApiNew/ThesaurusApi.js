@@ -46,7 +46,7 @@ function ThesaurusApi(props) {
       return;
     }
     // Reset all states and input field
-    setData("");
+
     // setSearchWord("");
     setAdjWord("");
     setNounWord("");
@@ -152,6 +152,7 @@ function ThesaurusApi(props) {
           setData(response.data);
         } else {
           // If word doesn't exist it contains no "meta" in result and set data to word list
+          setData("");
           setWordList(response.data);
         }
       })
@@ -170,6 +171,11 @@ function ThesaurusApi(props) {
   // Search word on handle change
   const handleChange = (e) => {
     setSearchWord(e.target.value);
+  };
+
+  // Reset input field on click function
+  const reset = () => {
+    setSearchWord("");
   };
 
   // Search is triggered by the enter key (only if there are values)
@@ -199,6 +205,7 @@ function ThesaurusApi(props) {
             placeholder="&nbsp;"
             onChange={handleChange}
             onKeyPress={handleKeypress}
+            onClick={reset}
           />
           <span className="label">Whats Another Word For...</span>
           <span className="focus-bg"></span>
@@ -268,6 +275,15 @@ function ThesaurusApi(props) {
                       </Link>
                     ))}
                   </ul>
+                  {/* <ul className="displayResults__synonyms">
+                    {adjWord[0].meta.syns[1].map((synonym, i) => (
+                      <Link className="displayResults__link" to={synonym}>
+                        <li className="displayResults__synonym" key={i}>
+                          {synonym}
+                        </li>
+                      </Link>
+                    ))}
+                  </ul> */}
                 </article>
               )}
 
