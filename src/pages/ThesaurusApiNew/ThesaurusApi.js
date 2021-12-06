@@ -199,7 +199,7 @@ function ThesaurusApi(props) {
             type="text"
             value={searchWord}
             placeholder="&nbsp;"
-            // onChange={handleChange}
+            onChange={handleChange}
             onKeyPress={handleKeypress}
           />
           <span className="label">Whats Another Word For...</span>
