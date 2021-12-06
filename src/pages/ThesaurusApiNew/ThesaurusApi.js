@@ -48,7 +48,7 @@ function ThesaurusApi(props) {
       return;
     }
     // Reset all states and input field
-    setData("");
+    // setData("");
     setSearchWord("");
     setAdjWord("");
     setNounWord("");
@@ -164,9 +164,9 @@ function ThesaurusApi(props) {
 
   /*--------------------- FUNCTIONS ----------------------------------- */
 
-  // Refresh page function
+  // Refresh page and go to home function
   const refreshPage = () => {
-    window.location.reload();
+    window.location.replace("/");
   };
 
   // Search word on handle change
@@ -187,9 +187,9 @@ function ThesaurusApi(props) {
   return (
     <div className="thes">
       {/* HEADER */}
-      <h1 className="thes__header" onClick={refreshPage}>
-        Synonyms
-      </h1>
+      <Link className="thes__header--link" to="/" onClick={refreshPage}>
+        <h1 className="thes__header">Synonyms</h1>
+      </Link>
 
       {/*--------------------- SEARCH SECTION ----------------------------- */}
       <form className="thes__search" onSubmit={handleChange}>

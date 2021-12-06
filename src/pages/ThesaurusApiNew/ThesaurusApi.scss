@@ -24,6 +24,10 @@
     font-family: "Pacifico", cursive;
     color: $Terra-Cotta;
     padding: 0.5rem;
+
+    &--link {
+      text-decoration: none;
+    }
   }
 
   &__search {
