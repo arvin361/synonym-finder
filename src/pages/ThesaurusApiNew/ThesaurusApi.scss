@@ -112,6 +112,13 @@
     text-decoration: none;
   }
 
+  &__typeOfSyn {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: $Independence;
+    font-weight: bold;
+  }
+
   &__definitions {
     padding: 8px;
   }

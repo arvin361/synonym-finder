@@ -26,16 +26,14 @@ function ThesaurusApi(props) {
     // if (id) {
     //   getSynonym();
     // }
-
-    // setSearchWord(id);
   }, [id]);
 
-  // useEffect(() => {
-  //   // setSearchWord(searchWord);
-  //   getSynonym();
+  useEffect(() => {
+    // setSearchWord(searchWord);
+    getSynonym();
 
-  //   // setSearchWord(id);
-  // }, [searchWord]);
+    // setSearchWord(id);
+  }, [searchWord]);
 
   // API KEY and URL
   const apiKey = "4a7d190a-e6c6-4c00-b595-a957035618a5";
@@ -48,8 +46,8 @@ function ThesaurusApi(props) {
       return;
     }
     // Reset all states and input field
-    // setData("");
-    setSearchWord("");
+    setData("");
+    // setSearchWord("");
     setAdjWord("");
     setNounWord("");
     setAdverbWord("");
@@ -192,7 +190,7 @@ function ThesaurusApi(props) {
       </Link>
 
       {/*--------------------- SEARCH SECTION ----------------------------- */}
-      <form className="thes__search" onSubmit={handleChange}>
+      <div className="thes__search">
         <label htmlFor="inp" className="inp">
           <input
             name="search"
@@ -214,7 +212,7 @@ function ThesaurusApi(props) {
         >
           SEARCH
         </button>
-      </form>
+      </div>
 
       {/*--------------------- RESULTS SECTION ----------------------------- */}
       {data
@@ -223,25 +221,132 @@ function ThesaurusApi(props) {
             <div className="displayResults">
               {/* SEARCHED WORD */}
               <h3 className="displayResults__word">{data[0].meta.id} </h3>
+              {/*--------------------- SYNONYMS SECTION ---------------------------- */}
               {/* MAP SYNONYMS ARRAY */}
-              <ul className="displayResults__synonyms">
+              {/* <ul className="displayResults__synonyms">
                 {wordList.map((synonym, i) => (
-                  <Link
-                    className="displayResults__link"
-                    // onClick={getSynonym()}
-                    to={synonym}
-                  >
+                  <Link className="displayResults__link" to={synonym}>
                     <li className="displayResults__synonym" key={i}>
                       {synonym}
                     </li>
                   </Link>
                 ))}
-              </ul>
+              </ul> */}
+
+              {/* ADVERB (IF EXISTS) */}
+              {adverbWord && (
+                <article>
+                  <p className="displayResults__typeOfSyn">
+                    {adverbWord[0].fl}
+                  </p>
+
+                  {/* MAP SYNONYMS */}
+                  <ul className="displayResults__synonyms">
+                    {adverbWord[0].meta.syns[0].map((synonym, i) => (
+                      <Link className="displayResults__link" to={synonym}>
+                        <li className="displayResults__synonym" key={i}>
+                          {synonym}
+                        </li>
+                      </Link>
+                    ))}
+                  </ul>
+                </article>
+              )}
+
+              {/* ADJECTIVE (IF EXISTS) */}
+              {adjWord && (
+                <article>
+                  <p className="displayResults__typeOfSyn">{adjWord[0].fl}</p>
+
+                  {/* MAP SYNONYMS */}
+                  <ul className="displayResults__synonyms">
+                    {adjWord[0].meta.syns[0].map((synonym, i) => (
+                      <Link className="displayResults__link" to={synonym}>
+                        <li className="displayResults__synonym" key={i}>
+                          {synonym}
+                        </li>
+                      </Link>
+                    ))}
+                  </ul>
+                </article>
+              )}
+
+              {/* NOUN (IF EXISTS) */}
+              {nounWord && (
+                <article>
+                  <p className="displayResults__typeOfSyn">{nounWord[0].fl}</p>
+
+                  {/* MAP SYNONYMS */}
+                  <ul className="displayResults__synonyms">
+                    {nounWord[0].meta.syns[0].map((synonym, i) => (
+                      <Link className="displayResults__link" to={synonym}>
+                        <li className="displayResults__synonym" key={i}>
+                          {synonym}
+                        </li>
+                      </Link>
+                    ))}
+                  </ul>
+                </article>
+              )}
+
+              {/* VERB (IF EXISTS) */}
+              {verbWord && (
+                <article>
+                  <p className="displayResults__typeOfSyn">{verbWord[0].fl}</p>
+
+                  {/* MAP SYNONYMS */}
+                  <ul className="displayResults__synonyms">
+                    {verbWord[0].meta.syns[0].map((synonym, i) => (
+                      <Link className="displayResults__link" to={synonym}>
+                        <li className="displayResults__synonym" key={i}>
+                          {synonym}
+                        </li>
+                      </Link>
+                    ))}
+                  </ul>
+                </article>
+              )}
+
+              {/* CONJUNCTION (IF EXISTS) */}
+              {conjWord && (
+                <article>
+                  <p className="displayResults__typeOfSyn">{conjWord[0].fl}</p>
+
+                  {/* MAP SYNONYMS */}
+                  <ul className="displayResults__synonyms">
+                    {conjWord[0].meta.syns[0].map((synonym, i) => (
+                      <Link className="displayResults__link" to={synonym}>
+                        <li className="displayResults__synonym" key={i}>
+                          {synonym}
+                        </li>
+                      </Link>
+                    ))}
+                  </ul>
+                </article>
+              )}
 
               {/*--------------------- DEFINITIONS SECTION ---------------------------- */}
               <section className="displayResults__definitions">
                 {/* DEFINITIONS */}
                 <h1 className="displayResults__header2">Definitions</h1>
+
+                {/* ADVERB (IF EXISTS) */}
+                {adverbWord && (
+                  <article className="displayResults__typeResults">
+                    <p className="displayResults__typeOf">{adverbWord[0].fl}</p>
+
+                    {/* MAP SHORT DEFINITIONS */}
+                    <section className="displayResults__typeDef">
+                      <ol className="displayResults__shortDef">
+                        {adverbWord[0].shortdef.map((def, i) => (
+                          <li className="displayResults__define-result" key={i}>
+                            {def}
+                          </li>
+                        ))}
+                      </ol>
+                    </section>
+                  </article>
+                )}
 
                 {/* ADJECTIVE (IF EXISTS) */}
                 {adjWord && (
@@ -270,24 +375,6 @@ function ThesaurusApi(props) {
                     <section className="displayResults__typeDef">
                       <ol className="displayResults__shortDef">
                         {nounWord[0].shortdef.map((def, i) => (
-                          <li className="displayResults__define-result" key={i}>
-                            {def}
-                          </li>
-                        ))}
-                      </ol>
-                    </section>
-                  </article>
-                )}
-
-                {/* ADVERB (IF EXISTS) */}
-                {adverbWord && (
-                  <article className="displayResults__typeResults">
-                    <p className="displayResults__typeOf">{adverbWord[0].fl}</p>
-
-                    {/* MAP SHORT DEFINITIONS */}
-                    <section className="displayResults__typeDef">
-                      <ol className="displayResults__shortDef">
-                        {adverbWord[0].shortdef.map((def, i) => (
                           <li className="displayResults__define-result" key={i}>
                             {def}
                           </li>
