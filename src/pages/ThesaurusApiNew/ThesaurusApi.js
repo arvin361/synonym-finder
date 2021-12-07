@@ -164,14 +164,6 @@ function ThesaurusApi(props) {
     setSearchWord("");
   };
 
-  // Search is triggered by the enter key (only if there are values)
-  // const handleKeypress = (e) => {
-  //   var key = e.keyCode || e.which;
-  //   if (key === 13 && searchWord) {
-  //     getSynonym();
-  //   }
-  // };
-
   /*--------------------- RETURN ----------------------------------- */
 
   return (
@@ -194,7 +186,6 @@ function ThesaurusApi(props) {
             value={searchWord}
             placeholder="&nbsp;"
             onChange={handleChange}
-            // onKeyPress={handleKeypress}
             onClick={reset}
           />
           <span className="label">Whats Another Word For...</span>
@@ -208,7 +199,6 @@ function ThesaurusApi(props) {
             // IF WORD EXISTS
             <div className="displayResults">
               {/* SEARCHED WORD */}
-              {/* <h3 className="displayResults__word">{data[0].meta.id} </h3> */}
               {/*--------------------- SYNONYMS SECTION ---------------------------- */}
               {/* MAP SYNONYMS ARRAY */}
 
