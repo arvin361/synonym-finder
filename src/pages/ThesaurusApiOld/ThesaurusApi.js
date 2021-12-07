@@ -33,6 +33,7 @@ function ThesaurusApi(props) {
     getSynonym();
 
     // setSearchWord(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchWord]);
 
   // API KEY and URL
