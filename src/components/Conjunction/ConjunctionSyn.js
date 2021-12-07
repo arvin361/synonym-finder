@@ -9,10 +9,8 @@ export default function ConjunctionSyn(props) {
       {/* MAP SYNONYMS */}
       <ul className="displayResults__synonyms">
         {props.conjWord[0].meta.syns[0].map((synonym, i) => (
-          <Link className="displayResults__link" to={synonym}>
-            <li className="displayResults__synonym" key={i}>
-              {synonym}
-            </li>
+          <Link className="displayResults__link" to={synonym} key={i}>
+            <li className="displayResults__synonym">{synonym}</li>
           </Link>
         ))}
       </ul>

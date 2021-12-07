@@ -235,10 +235,8 @@ function ThesaurusApi(props) {
               {/* MAP SUGGESTED WORDS */}
               <ul className="otherResults__notWordList">
                 {wordList.map((word, i) => (
-                  <Link className="otherResults__link" to={word}>
-                    <li className="otherResults__notWord" key={i}>
-                      {word}
-                    </li>
+                  <Link className="otherResults__link" to={word} key={i}>
+                    <li className="otherResults__notWord">{word}</li>
                   </Link>
                 ))}
               </ul>
