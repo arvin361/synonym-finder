@@ -8,6 +8,7 @@ function App() {
       <Switch>
         {/* <ThesaurusApi /> */}
         <Route component={ThesaurusApi} path="/" exact />
+        <Route component={ThesaurusApi} path="/index.html" />
         <Route component={ThesaurusApi} path="/:id" />
       </Switch>
     </Router>
