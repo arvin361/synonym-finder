@@ -39,16 +39,15 @@ function ThesaurusApi(props) {
     if (!searchWord) {
       return;
     }
-    // Reset all states and input field
 
-    // setSearchWord("");
+    // Reset all states accordingly
     setAdjWord("");
     setNounWord("");
     setAdverbWord("");
     setVerbWord("");
     setConjWord("");
 
-    // AXIOS API CALL
+    // AXIOS GET API CALL
     axios
       .get(apiURL)
       .then((response) => {
@@ -66,7 +65,6 @@ function ThesaurusApi(props) {
 
           const syns1 = response.data[0].meta.syns[0];
           const syns2 = response.data[0].meta.syns[1];
-          // const syns3 = response.data[0].meta.syns[2];
 
           response.data.forEach((element) => {
             console.log(element.meta.syns);
@@ -136,12 +134,6 @@ function ThesaurusApi(props) {
             setConjWord(conjWord);
           }
 
-          // console.log(nounWord);
-
-          // const adjWordSyn = adjWord[0].meta.syns[0];
-
-          // console.log(adjWord[0].meta.syns[0]);
-
           // If word exists set data
           setData(response.data);
         } else {
@@ -173,12 +165,12 @@ function ThesaurusApi(props) {
   };
 
   // Search is triggered by the enter key (only if there are values)
-  const handleKeypress = (e) => {
-    var key = e.keyCode || e.which;
-    if (key === 13 && searchWord) {
-      getSynonym();
-    }
-  };
+  // const handleKeypress = (e) => {
+  //   var key = e.keyCode || e.which;
+  //   if (key === 13 && searchWord) {
+  //     getSynonym();
+  //   }
+  // };
 
   /*--------------------- RETURN ----------------------------------- */
 
@@ -202,21 +194,12 @@ function ThesaurusApi(props) {
             value={searchWord}
             placeholder="&nbsp;"
             onChange={handleChange}
-            onKeyPress={handleKeypress}
+            // onKeyPress={handleKeypress}
             onClick={reset}
           />
           <span className="label">Whats Another Word For...</span>
           <span className="focus-bg"></span>
         </label>
-
-        <button
-          disabled={!searchWord}
-          className="thes__button"
-          onClick={getSynonym}
-          type="submit"
-        >
-          SEARCH
-        </button>
       </div>
 
       {/*--------------------- RESULTS SECTION ----------------------------- */}
@@ -225,18 +208,9 @@ function ThesaurusApi(props) {
             // IF WORD EXISTS
             <div className="displayResults">
               {/* SEARCHED WORD */}
-              <h3 className="displayResults__word">{data[0].meta.id} </h3>
+              {/* <h3 className="displayResults__word">{data[0].meta.id} </h3> */}
               {/*--------------------- SYNONYMS SECTION ---------------------------- */}
               {/* MAP SYNONYMS ARRAY */}
-              {/* <ul className="displayResults__synonyms">
-                {wordList.map((synonym, i) => (
-                  <Link className="displayResults__link" to={synonym}>
-                    <li className="displayResults__synonym" key={i}>
-                      {synonym}
-                    </li>
-                  </Link>
-                ))}
-              </ul> */}
 
               {/* ADVERB (IF EXISTS) */}
               {adverbWord && (
