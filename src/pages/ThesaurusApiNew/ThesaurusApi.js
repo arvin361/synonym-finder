@@ -35,6 +35,7 @@ function ThesaurusApi(props) {
 
   useEffect(() => {
     getSynonym();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchWord]);
 
   // console.log(id);
@@ -185,6 +186,7 @@ function ThesaurusApi(props) {
             // IF WORD EXISTS
             <div className="displayResults">
               {/* SEARCHED WORD */}
+              <h3 className="displayResults__word">{data[0].meta.id} </h3>
               {/*--------------------- SYNONYMS SECTION ---------------------------- */}
               {/* MAP SYNONYMS ARRAY */}
 

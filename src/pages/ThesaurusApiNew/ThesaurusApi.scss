@@ -40,10 +40,13 @@
   padding: 0px 20px 20px;
 
   &__word {
-    font-size: 2rem;
+    font-size: 1.3rem;
     text-decoration: underline;
     text-align: center;
     color: $Independence;
+    color: #457b9d;
+    color: #014f86;
+    margin: 0 0 0.5rem;
   }
 
   &__synonyms {
