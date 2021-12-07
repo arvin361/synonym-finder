@@ -3,6 +3,16 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./ThesaurusApi.scss";
+import AdverbSyn from "../../components/Adverb/AdverbSyn";
+import AdverbDef from "../../components/Adverb/AdverbDef";
+import AdjectiveSyn from "../../components/Adjective/AdjectiveSyn";
+import AdjectiveDef from "../../components/Adjective/AdjectiveDef";
+import NounSyn from "../../components/Noun/NounSyn";
+import NounDef from "../../components/Noun/NounDef";
+import VerbSyn from "../../components/Verb/VerbSyn";
+import VerbDef from "../../components/Verb/VerbDef";
+import ConjunctionSyn from "../../components/Conjunction/ConjunctionSyn";
+import ConjuntionDef from "../../components/Conjunction/ConjunctionDef";
 
 function ThesaurusApi(props) {
   const { id } = useParams();
@@ -27,7 +37,7 @@ function ThesaurusApi(props) {
     getSynonym();
   }, [searchWord]);
 
-  console.log(id);
+  // console.log(id);
 
   // API KEY and URL
   const apiKey = "4a7d190a-e6c6-4c00-b595-a957035618a5";
@@ -53,35 +63,12 @@ function ThesaurusApi(props) {
       .then((response) => {
         // If word exists then it contains a "meta" value
         if (response.data[0].meta) {
-          // Set response.data to variable rd
-          const rd = response.data;
-
           // Console log all data for searched word
-          console.log(rd);
+          console.log(response.data);
 
-          const synonymList = rd[0].meta.syns;
-
-          console.log(synonymList);
-
-          const syns1 = response.data[0].meta.syns[0];
-          const syns2 = response.data[0].meta.syns[1];
-
-          response.data.forEach((element) => {
-            console.log(element.meta.syns);
-          });
-
-          console.log(response.data[0]);
-
-          const synList = syns1;
-
-          if (synonymList.length === 1) {
-            setWordList(synList);
-          } else {
-            let synList = [...syns1, ...syns2];
-            setWordList(synList);
-          }
-
-          console.log(synList);
+          // response.data.forEach((element) => {
+          //   console.log(element.meta.syns);
+          // });
 
           // Filtering through result to find if each has...
           // ADJECTIVES
@@ -114,7 +101,6 @@ function ThesaurusApi(props) {
           // NOUN
           if (noun.length > 0) {
             const nounWord = noun;
-            console.log(nounWord);
             setNounWord(nounWord);
           }
           // ADVERB
@@ -137,7 +123,7 @@ function ThesaurusApi(props) {
           // If word exists set data
           setData(response.data);
         } else {
-          // If word doesn't exist it contains no "meta" in result and set data to word list
+          // If word doesn't exist it contains no "meta" in result and set data to wordList and reset setData to empty since word does not exist
           setData("");
           setWordList(response.data);
         }
@@ -154,7 +140,7 @@ function ThesaurusApi(props) {
     window.location.replace("/index.html");
   };
 
-  // Search word on handle change
+  // Search word on handle change making it more dynamic
   const handleChange = (e) => {
     setSearchWord(e.target.value);
   };
@@ -203,96 +189,19 @@ function ThesaurusApi(props) {
               {/* MAP SYNONYMS ARRAY */}
 
               {/* ADVERB (IF EXISTS) */}
-              {adverbWord && (
-                <article>
-                  <p className="displayResults__typeOfSyn">
-                    {adverbWord[0].fl}
-                  </p>
-
-                  {/* MAP SYNONYMS */}
-                  <ul className="displayResults__synonyms">
-                    {adverbWord[0].meta.syns[0].map((synonym, i) => (
-                      <Link className="displayResults__link" to={synonym}>
-                        <li className="displayResults__synonym" key={i}>
-                          {synonym}
-                        </li>
-                      </Link>
-                    ))}
-                  </ul>
-                </article>
-              )}
+              {adverbWord && <AdverbSyn adverbWord={adverbWord} />}
 
               {/* ADJECTIVE (IF EXISTS) */}
-              {adjWord && (
-                <article>
-                  <p className="displayResults__typeOfSyn">{adjWord[0].fl}</p>
-
-                  {/* MAP SYNONYMS */}
-                  <ul className="displayResults__synonyms">
-                    {adjWord[0].meta.syns[0].map((synonym, i) => (
-                      <Link className="displayResults__link" to={synonym}>
-                        <li className="displayResults__synonym" key={i}>
-                          {synonym}
-                        </li>
-                      </Link>
-                    ))}
-                  </ul>
-                </article>
-              )}
+              {adjWord && <AdjectiveSyn adjWord={adjWord} />}
 
               {/* NOUN (IF EXISTS) */}
-              {nounWord && (
-                <article>
-                  <p className="displayResults__typeOfSyn">{nounWord[0].fl}</p>
-
-                  {/* MAP SYNONYMS */}
-                  <ul className="displayResults__synonyms">
-                    {nounWord[0].meta.syns[0].map((synonym, i) => (
-                      <Link className="displayResults__link" to={synonym}>
-                        <li className="displayResults__synonym" key={i}>
-                          {synonym}
-                        </li>
-                      </Link>
-                    ))}
-                  </ul>
-                </article>
-              )}
+              {nounWord && <NounSyn nounWord={nounWord} />}
 
               {/* VERB (IF EXISTS) */}
-              {verbWord && (
-                <article>
-                  <p className="displayResults__typeOfSyn">{verbWord[0].fl}</p>
-
-                  {/* MAP SYNONYMS */}
-                  <ul className="displayResults__synonyms">
-                    {verbWord[0].meta.syns[0].map((synonym, i) => (
-                      <Link className="displayResults__link" to={synonym}>
-                        <li className="displayResults__synonym" key={i}>
-                          {synonym}
-                        </li>
-                      </Link>
-                    ))}
-                  </ul>
-                </article>
-              )}
+              {verbWord && <VerbSyn verbWord={verbWord} />}
 
               {/* CONJUNCTION (IF EXISTS) */}
-              {conjWord && (
-                <article>
-                  <p className="displayResults__typeOfSyn">{conjWord[0].fl}</p>
-
-                  {/* MAP SYNONYMS */}
-                  <ul className="displayResults__synonyms">
-                    {conjWord[0].meta.syns[0].map((synonym, i) => (
-                      <Link className="displayResults__link" to={synonym}>
-                        <li className="displayResults__synonym" key={i}>
-                          {synonym}
-                        </li>
-                      </Link>
-                    ))}
-                  </ul>
-                </article>
-              )}
+              {conjWord && <ConjunctionSyn conjWord={conjWord} />}
 
               {/*--------------------- DEFINITIONS SECTION ---------------------------- */}
               <section className="displayResults__definitions">
@@ -300,94 +209,19 @@ function ThesaurusApi(props) {
                 <h1 className="displayResults__header2">Definitions</h1>
 
                 {/* ADVERB (IF EXISTS) */}
-                {adverbWord && (
-                  <article className="displayResults__typeResults">
-                    <p className="displayResults__typeOf">{adverbWord[0].fl}</p>
-
-                    {/* MAP SHORT DEFINITIONS */}
-                    <section className="displayResults__typeDef">
-                      <ol className="displayResults__shortDef">
-                        {adverbWord[0].shortdef.map((def, i) => (
-                          <li className="displayResults__define-result" key={i}>
-                            {def}
-                          </li>
-                        ))}
-                      </ol>
-                    </section>
-                  </article>
-                )}
+                {adverbWord && <AdverbDef adverbWord={adverbWord} />}
 
                 {/* ADJECTIVE (IF EXISTS) */}
-                {adjWord && (
-                  <article className="displayResults__typeResults">
-                    <p className="displayResults__typeOf">{adjWord[0].fl}</p>
-
-                    {/* MAP SHORT DEFINITIONS */}
-                    <section className="displayResults__typeDef">
-                      <ol className="displayResults__shortDef">
-                        {adjWord[0].shortdef.map((def, i) => (
-                          <li className="displayResults__define-result" key={i}>
-                            {def}
-                          </li>
-                        ))}
-                      </ol>
-                    </section>
-                  </article>
-                )}
+                {adjWord && <AdjectiveDef adjWord={adjWord} />}
 
                 {/* NOUN (IF EXISTS) */}
-                {nounWord && (
-                  <article className="displayResults__typeResults">
-                    <p className="displayResults__typeOf">{nounWord[0].fl}</p>
-
-                    {/* MAP SHORT DEFINITIONS */}
-                    <section className="displayResults__typeDef">
-                      <ol className="displayResults__shortDef">
-                        {nounWord[0].shortdef.map((def, i) => (
-                          <li className="displayResults__define-result" key={i}>
-                            {def}
-                          </li>
-                        ))}
-                      </ol>
-                    </section>
-                  </article>
-                )}
+                {nounWord && <NounDef nounWord={nounWord} />}
 
                 {/* VERB (IF EXISTS) */}
-                {verbWord && (
-                  <article className="displayResults__typeResults">
-                    <p className="displayResults__typeOf">{verbWord[0].fl}</p>
-
-                    {/* MAP SHORT DEFINITIONS */}
-                    <section className="displayResults__typeDef">
-                      <ol className="displayResults__shortDef">
-                        {verbWord[0].shortdef.map((def, i) => (
-                          <li className="displayResults__define-result" key={i}>
-                            {def}
-                          </li>
-                        ))}
-                      </ol>
-                    </section>
-                  </article>
-                )}
+                {verbWord && <VerbDef verbWord={verbWord} />}
 
                 {/* CONJUNCTION (IF EXISTS) */}
-                {conjWord && (
-                  <article className="displayResults__typeResults">
-                    <p className="displayResults__typeOf">{conjWord[0].fl}</p>
-
-                    {/* MAP SHORT DEFINITIONS */}
-                    <section className="displayResults__typeDef">
-                      <ol className="displayResults__shortDef">
-                        {conjWord[0].shortdef.map((def, i) => (
-                          <li className="displayResults__define-result" key={i}>
-                            {def}
-                          </li>
-                        ))}
-                      </ol>
-                    </section>
-                  </article>
-                )}
+                {conjWord && <ConjuntionDef conjWord={conjWord} />}
               </section>
             </div>
           )
