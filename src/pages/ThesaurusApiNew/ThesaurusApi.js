@@ -12,7 +12,7 @@ import NounDef from "../../components/Noun/NounDef";
 import VerbSyn from "../../components/Verb/VerbSyn";
 import VerbDef from "../../components/Verb/VerbDef";
 import ConjunctionSyn from "../../components/Conjunction/ConjunctionSyn";
-import ConjuntionDef from "../../components/Conjunction/ConjunctionDef";
+import ConjunctionDef from "../../components/Conjunction/ConjunctionDef";
 
 function ThesaurusApi(props) {
   const { id } = useParams();
@@ -223,7 +223,7 @@ function ThesaurusApi(props) {
                 {verbWord && <VerbDef verbWord={verbWord} />}
 
                 {/* CONJUNCTION (IF EXISTS) */}
-                {conjWord && <ConjuntionDef conjWord={conjWord} />}
+                {conjWord && <ConjunctionDef conjWord={conjWord} />}
               </section>
             </div>
           )

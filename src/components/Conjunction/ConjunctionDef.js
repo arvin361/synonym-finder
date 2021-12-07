@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ConjuntionDef(props) {
+export default function ConjunctionDef(props) {
   return (
     <article className="displayResults__typeResults">
       <p className="displayResults__typeOf">{props.conjWord[0].fl}</p>
