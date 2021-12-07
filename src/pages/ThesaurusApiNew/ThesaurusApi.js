@@ -175,7 +175,7 @@ function ThesaurusApi(props) {
             onChange={handleChange}
             onClick={reset}
           />
-          <span className="label">Whats Another Word For...</span>
+          <span className="label">What's Another Word For...</span>
           <span className="focus-bg"></span>
         </label>
       </div>
@@ -235,7 +235,7 @@ function ThesaurusApi(props) {
               {/* MAP SUGGESTED WORDS */}
               <ul className="otherResults__notWordList">
                 {wordList.map((word, i) => (
-                  <Link to={word}>
+                  <Link className="otherResults__link" to={word}>
                     <li className="otherResults__notWord" key={i}>
                       {word}
                     </li>
