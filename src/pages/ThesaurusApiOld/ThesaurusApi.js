@@ -19,15 +19,21 @@ function ThesaurusApi(props) {
   const [verbWord, setVerbWord] = useState("");
   const [conjWord, setConjWord] = useState("");
 
+  console.log(id);
+
   useEffect(() => {
     setSearchWord(id);
+    // if (id) {
+    //   getSynonym();
+    // }
   }, [id]);
 
   useEffect(() => {
+    // setSearchWord(searchWord);
     getSynonym();
-  }, [searchWord]);
 
-  console.log(id);
+    // setSearchWord(id);
+  }, [searchWord]);
 
   // API KEY and URL
   const apiKey = "4a7d190a-e6c6-4c00-b595-a957035618a5";
@@ -159,7 +165,7 @@ function ThesaurusApi(props) {
 
   // Refresh page and go to home function
   const refreshPage = () => {
-    window.location.replace("/index.html");
+    window.location.replace("/");
   };
 
   // Search word on handle change
@@ -185,11 +191,7 @@ function ThesaurusApi(props) {
   return (
     <div className="thes">
       {/* HEADER */}
-      <Link
-        className="thes__header--link"
-        to="/index.html"
-        onClick={refreshPage}
-      >
+      <Link className="thes__header--link" to="/" onClick={refreshPage}>
         <h1 className="thes__header">Synonyms</h1>
       </Link>
 
