@@ -8,91 +8,122 @@ Synonym Finder is an application that allows you to conveniently search for a wo
 
 # Demo-Preview
 
-<img src="src/images/README/synonymdemo1.png" alt="Synonym Finder Demo"/>
-
-<img src="src/images/README/synonymdemo2.png" alt="Synonym Finder Demo"/>
-
-<img src="src/images/README/synonymdemo3.png" alt="Synonym Finder Demo"/>
+<img src="src/images/README/synonymdemo1.png" alt="Synonym Finder Demo" width="200px;"/> <img src="src/images/README/synonymdemo2.png" alt="Synonym Finder Demo" width="200px;"/> <img src="src/images/README/synonymdemo3.png" alt="Synonym Finder Demo" width="200px;"/>
 
 # Chrome Web Extension Store
 
 The main functionality of Synonym Finder is to be used as a web browser extension and therefore is currently published on the Chrome Web Extension Store and can be accessed and used immediately by going to the following link and clicking `Add to Chrome`
 
-Visit the extension at: (https://chrome.google.com/webstore/detail/synonym-finder/illimocegjikcgmopnajholfanllebic)
+Visit the extension at: [Synonym Finder](https://chrome.google.com/webstore/detail/synonym-finder/illimocegjikcgmopnajholfanllebic)
 
 Afterwards you can go to your extensions manager and pin it to begin searching for synonyms!
 
 <img src="src/images/README/synonymdemo4.png" alt="Pin extension in extension manager"/>
 
-> _Note: For more info on how to deploy an extension refer to the 'Deployment' section_
+> _Note: For more info on how to clone this application refer to the 'Cloning This Repository' section_
 
-# Getting Started with Create React App
+# Features
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Existing Features
 
-## Available Scripts
+#### Dynamic Page
 
-In the project directory, you can run:
+- The application is modeled as a progressive web application to render a single-page-app's functionality without full page reloads and optimized to perform like a native app.
 
-### `npm start`
+- The application takes advantage of the `useEffect` functionality in which the user is able to search a word dynamically by updating the results upon each key stroke made.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Since the application displays results "in real time" there was no use for a search bar/button making the design cleaner and simpler for the users experience.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### Search / Results
 
-### `npm test`
+- The application is written to return a list of Synonyms organized by each of its parts of speech.
+- The application also displays a Definitions section in which it also gives the user a short definition for each of its parts of speech as well.
+- The application also displays the current word searched below the search field as reference due to the following action.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- #### Actions:
+  - Ability to clear the input field upon clicking the search bar for a more efficient user experience.
+  - Ability to click on any given synonyms displayed and search the synonyms for that word as well by using its `/:id`.
 
-### `npm run build`
+#### Suggested words / Non-existent word
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- The application is able to give a list of suggestions if the user searches for a word that doesn't exist.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- #### Actions:
+  - Ability to display a list of **_Did you mean:_** words
+  - Ability to click on any suggested word and display the synonyms and its other results for that word.
+
+## Future Features To Implement
+
+- A "show more" feature that displays more synonyms and results.
+- Show a list of antonyms for a searched word.
+- Implement a login and authentication feature.
+- Implement a database and server.
+- Ability to manage a users search history after their browser session.
+
+# Technologies
+
+### API
+
+- [Dictionary Api - Collegiate Thesaurus:](https://dictionaryapi.com/products/api-collegiate-thesaurus) Used the Merriam-Webster Dictionary API, specifically it's Collegiate Thesaurus in which I had to register and request for the API key.
+
+### Frameworks and Libraries
+
+- [Create React App](https://github.com/facebook/create-react-app) This application was bootstrapped with create-react-app.
+- [Webpack:](https://webpack.js.org/) The static module bundler that builds a dependency graph mapping every module the project requires.
+- [React V^17.0.2:](https://reactjs.org/) React Framework for production and JavaScript Library for building user interfaces.
+- [React-router-dom V^5.3.0:](https://www.npmjs.com/package/react-router-dom) The package contains bindings for using React Router in web applications.
+- [Babel:](https://babeljs.io/docs/en/) The toolchain compiler that transforms syntax to ensure all evolved code function, namely between `jsx`, `jss` `js`.
+- [Axios:](https://github.com/axios/axios) The promise-based HTTP client for the application that handles calls to the Thesaurus API.
+- [Sass:](https://sass-lang.com/) An extension of CSS that enables the use of variables, nested rules, inline imports and more. It also helps to keep things organised and allows you to create style sheets more efficiently.
+
+# Cloning This Repository
+
+- Clone this repo by running the following command in your terminal:
+
+```bash
+git clone git@github.com:arvin361/synonym-finder.git
+```
+
+- at the jump, `cd` to the name of this repository:
+
+```bash
+cd synonym-finder
+```
+
+- install the necessary packages and dependencies by running:
+
+```bash
+npm install
+```
+
+- and to run the application on your local host web browser run:
+
+```bash
+npm start
+```
+
+- this will run the application in the development mode...
+
+- finally open [http://localhost:3000](http://localhost:3000) to view it in your browser and you can immediately start typing any word you like in the search bar for it's synonyms along with it's short definitions and parts of speech!
+
+- Happy searching! 🥳
+
+### Deployment
+
+- To build the app for production and create the `build` folder run:
+
+```bash
+npm run build
+```
+
+- This correctly bundles React in production mode and optimizes the build for the best performance.
+- The build is minified and the filenames include the hashes.
+- The application is now ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
