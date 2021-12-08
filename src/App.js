@@ -1,15 +1,14 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import ThesaurusApi from "../src/pages/ThesaurusApiNew/ThesaurusApi";
+import SynonymFinder from "../src/pages/SynonymFinder/SynonymFinder";
 import "./App.scss";
 
 function App() {
   return (
     <Router>
       <Switch>
-        {/* <ThesaurusApi /> */}
-        <Route component={ThesaurusApi} path="/" exact />
-        <Route component={ThesaurusApi} path="/index.html" />
-        <Route component={ThesaurusApi} path="/:id" />
+        <Route component={SynonymFinder} path="/" exact />
+        <Route component={SynonymFinder} path="/index.html" />
+        <Route component={SynonymFinder} path="/:id" />
       </Switch>
     </Router>
   );
