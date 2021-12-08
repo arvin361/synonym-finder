@@ -1,3 +1,5 @@
+<img src="src/images/README/synonyms1.png" alt="Synonym Finder Web Extension"/>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
