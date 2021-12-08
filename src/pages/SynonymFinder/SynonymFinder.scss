@@ -40,6 +40,7 @@
     color: $Dark-Blue;
     margin: 0 0 0.5rem;
     font-weight: 600;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
   }
 
   &__synonyms {
@@ -64,8 +65,18 @@
     width: fit-content;
     text-align: center;
     margin: 3px;
-    background-color: whitesmoke;
+    background-color: $White-Smoke;
     text-decoration: none;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+      background-color: $Light-Cotta;
+      color: $White;
+    }
+    &:active {
+      background-color: $Eggshell;
+      color: $Independence;
+    }
   }
 
   &__typeOfSyn {
@@ -114,6 +125,7 @@
     color: $Crimson-Red;
     font-style: italic;
     font-weight: bold;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
   }
 
   &__notWordList {
@@ -139,6 +151,17 @@
     text-align: center;
     margin: 3px;
     background-color: $White-Smoke;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+      background-color: $Light-Cotta;
+      color: $White;
+    }
+
+    &:active {
+      background-color: $Eggshell;
+      color: $Independence;
+    }
   }
 }
 

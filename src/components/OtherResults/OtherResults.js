@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function OtherResults(props) {
   return (
-    <div className="otherResults">
+    <article className="otherResults">
       <p className="otherResults__notFound">Did you mean:</p>
 
       {/* MAP SUGGESTED WORDS */}
@@ -14,6 +14,6 @@ export default function OtherResults(props) {
           </Link>
         ))}
       </ul>
-    </div>
+    </article>
   );
 }

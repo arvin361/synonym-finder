@@ -63,14 +63,7 @@ function SynonymFinder() {
       .then((response) => {
         // If word exists then it contains a "meta" value
         if (response.data[0].meta) {
-          // Console log all data for searched word
-          // console.log(response.data);
-
-          // response.data.forEach((element) => {
-          //   console.log(element.meta.syns);
-          // });
-
-          // Filtering through result to find if each has...
+          // Filtering through result to find if word contains...
           // ADJECTIVES
           const adjective = response.data.filter(function (speech) {
             return speech.fl === "adjective";
@@ -92,7 +85,7 @@ function SynonymFinder() {
             return speech.fl === "conjunction";
           });
 
-          // Check to see if specific word has the following parts of speech and set variable to set state for...
+          // Check to see if word contains the following parts of speech and set the variable to its useStates for the...
           // ADJECTIVE
           if (adjective.length > 0) {
             const adjWord = adjective;
@@ -113,7 +106,6 @@ function SynonymFinder() {
             const verbWord = verb;
             setVerbWord(verbWord);
           }
-
           // CONJUNCTION
           if (conjunction.length > 0) {
             const conjWord = conjunction;
@@ -123,8 +115,8 @@ function SynonymFinder() {
           // If word exists set data
           setData(response.data);
         } else {
-          // Else if word doesn't exist it contains no "meta" in result and set data to wordList
-          // Reset setData to empty to prevent rerendering since word "does not exist"
+          // Else if word doesn't exist it contains no "meta" in result and set data as wordList
+          // Empty setData to prevent it from re-rendering since word "does not exist"
           setData("");
           setWordList(response.data);
         }
@@ -165,7 +157,7 @@ function SynonymFinder() {
       </Link>
 
       {/*--------------------- SEARCH SECTION -------------------------- */}
-      <div className="page__search">
+      <section className="page__search">
         <label htmlFor="inp" className="inp">
           <input
             name="search"
@@ -178,13 +170,13 @@ function SynonymFinder() {
           <span className="label">What's Another Word For...</span>
           <span className="focus-bg"></span>
         </label>
-      </div>
+      </section>
 
       {/*--------------------- RESULTS SECTION ------------------------ */}
       {data
         ? data && (
             // IF WORD EXISTS
-            <div className="displayResults">
+            <section className="displayResults">
               {/* SEARCHED WORD */}
               <h3 className="displayResults__word">{data[0].meta.id} </h3>
               {/*---------------- SYNONYMS SECTION -------------------- */}
@@ -224,7 +216,7 @@ function SynonymFinder() {
                 {/* CONJUNCTION (IF EXISTS) */}
                 {conjWord && <ConjunctionDef conjWord={conjWord} />}
               </section>
-            </div>
+            </section>
           )
         : wordList && (
             // IF WORD DOES NOT EXIST
