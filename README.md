@@ -1,5 +1,31 @@
 <img src="src/images/README/synonyms1.png" alt="Synonym Finder Web Extension"/>
 
+# Synonym Finder
+
+Ever thought to yourself **_What's another word for..._**
+
+Synonym Finder is an application that allows you to conveniently search for a word and displays its synonyms as well as its definitions for each of its parts of speech!
+
+# Demo-Preview
+
+<img src="src/images/README/synonymdemo1.png" alt="Synonym Finder Demo"/>
+
+<img src="src/images/README/synonymdemo2.png" alt="Synonym Finder Demo"/>
+
+<img src="src/images/README/synonymdemo3.png" alt="Synonym Finder Demo"/>
+
+# Chrome Web Extension Store
+
+The main functionality of Synonym Finder is to be used as a web browser extension and therefore is currently published on the Chrome Web Extension Store and can be accessed and used immediately by going to the following link and clicking `Add to Chrome`
+
+Visit the extension at: (https://chrome.google.com/webstore/detail/synonym-finder/illimocegjikcgmopnajholfanllebic)
+
+Afterwards you can go to your extensions manager and pin it to begin searching for synonyms!
+
+<img src="src/images/README/synonymdemo4.png" alt="Pin extension in extension manager"/>
+
+> _Note: For more info on how to deploy an extension refer to the 'Deployment' section_
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
