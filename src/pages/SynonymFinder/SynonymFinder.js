@@ -156,7 +156,7 @@ function SynonymFinder() {
         <h1 className="page__header">Synonyms</h1>
       </Link>
 
-      {/*--------------------- SEARCH SECTION -------------------------- */}
+      {/*--------------------- SEARCH SECTION ------------------------ */}
       <section className="page__search">
         <label htmlFor="inp" className="inp">
           <input
@@ -172,7 +172,7 @@ function SynonymFinder() {
         </label>
       </section>
 
-      {/*--------------------- RESULTS SECTION ------------------------ */}
+      {/*--------------------- RESULTS SECTION ---------------------- */}
       {data
         ? data && (
             // IF WORD EXISTS
@@ -196,7 +196,7 @@ function SynonymFinder() {
               {/* CONJUNCTION (IF EXISTS) */}
               {conjWord && <ConjunctionSyn conjWord={conjWord} />}
 
-              {/*--------------------- DEFINITIONS SECTION ---------------------------- */}
+              {/*----------------- DEFINITIONS SECTION ----------------- */}
               <section className="displayResults__definitions">
                 {/* DEFINITIONS */}
                 <h1 className="displayResults__header2">Definitions</h1>
